@@ -15,8 +15,9 @@ import java.util.Scanner;
  * y muestra cómo va quedando la fila hasta terminar el servicio.
  */
 public class FilaTortillas {
-     public static void main(String[] args) {
-         Scanner leer = new Scanner(System.in);
+     public static void main(String[] args){
+         
+        Scanner leer = new Scanner(System.in);
         String[] fila = new String[10];
         int tamaño = 0;
         int opcion;
@@ -27,7 +28,7 @@ public class FilaTortillas {
             System.out.println("2) Atender cliente");
             System.out.println("3) Cliente sale de la fila");
             System.out.println("4) Terminar servicio");
-            System.out.print("Selecciona una opción: ");
+            System.out.print("Selecciona una opcion: ");
             opcion = leer.nextInt();
             leer.nextLine(); // salto de línea
             System.out.println("--------------------------------------------------");
@@ -36,13 +37,13 @@ public class FilaTortillas {
                 // Agregar cliente
                 case 1:
                     if (tamaño >= fila.length) {
-                        System.out.println("La fila está llena.");
+                        System.out.println("La fila ya esta llena.");
                     } else {
                         System.out.print("Nombre del cliente: ");
                         String nombre = leer.nextLine();
                         fila[tamaño] = nombre;
                         tamaño++;
-                        System.out.println("Cliente agregado correctamente.");
+                        System.out.println("Se agregado correctamente el cliente.");
                         mostrarFila(fila, tamaño);
                     }
                     break;
@@ -51,7 +52,7 @@ public class FilaTortillas {
                     if (tamaño == 0) {
                         System.out.println("No hay clientes en la fila.");
                     } else {
-                        System.out.println("Se atendió a: " + fila[0]);
+                        System.out.println("Se esta atendiendo a: " + fila[0]);
                         for (int i = 0; i < tamaño - 1; i++) {
                             fila[i] = fila[i + 1];
                         }
@@ -65,7 +66,7 @@ public class FilaTortillas {
                     if (tamaño == 0) {
                         System.out.println("No hay clientes en la fila.");
                     } else {
-                        System.out.print("Nombre del cliente que sale: ");
+                        System.out.print("Cliente que salio de la fila: ");
                         String nombre = leer.nextLine();
                         int indice = buscarCliente(fila, tamaño, nombre);
                         if (indice == -1) {
@@ -76,22 +77,23 @@ public class FilaTortillas {
                             }
                             tamaño--;
                             fila[tamaño] = null;
-                            System.out.println("🚶 Cliente " + nombre + " salió de la fila.");
+                            System.out.println("Cliente " + nombre + " se fue de la fila.");
                             mostrarFila(fila, tamaño);
                         }
                     }
                     break;
                 // Terminar servicio
                 case 4:
-                    System.out.println("Servicio terminado.");
+                    System.out.println("Servicio.");
                     System.out.println("Clientes restantes en la fila: " + tamaño);
                     mostrarFila(fila, tamaño);
-                    System.out.println("¡Hasta luego!");
+                    System.out.println("MUCHAS GRACIAS POR SUS COMPRAS POR EL DIA DE HOY "
+                            + "SERA TODO :)");
                     break;
                     
                 default:
                     if (opcion != 4)
-                        System.out.println("Opción no válida, intenta de nuevo.");
+                        System.out.println("Opcion no valida, intenta de nuevo.");
                     break;
             }
         } while (opcion != 4);
@@ -108,7 +110,7 @@ public class FilaTortillas {
     // Mostrar el estado actual de la fila
     private static void mostrarFila(String[] fila, int tamaño) {
         if (tamaño == 0) {
-            System.out.println("La fila está vacía.");
+            System.out.println("La fila esta vacía.");
         } else {
             System.out.print("Fila actual: ");
             for (int i = 0; i < tamaño; i++) {
