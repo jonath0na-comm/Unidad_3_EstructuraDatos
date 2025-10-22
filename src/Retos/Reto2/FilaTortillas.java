@@ -16,30 +16,36 @@ import java.util.Scanner;
  */
 public class FilaTortillas {
      public static void main(String[] args){
-         
          Scanner leer = new Scanner(System.in);
         String[] fila = new String[10];
         int tamaño = 0;
-        int opcion;
+        int opcion = 0;
 
         do {
-            System.out.println("------------------------------------------");
-            System.out.println("TORTILLERIA TEC");
-            System.out.println("------------------------------------------");
-            System.out.println("1) Agregar cliente a la fila");
-            System.out.println("2) Atender cliente");
-            System.out.println("3) Cliente sale de la fila");
-            System.out.println("4) Terminar servicio");
-            System.out.print("Selecciona una opcion: ");
-            opcion = leer.nextInt();
-            leer.nextLine(); // salto de línea
-            System.out.println("--------------------------------------------------");
+            // Bloque para capturar errores de tipo
+            while (true) {
+                try {
+                    System.out.println("\n------------------------------------------");
+                    System.out.println("TORTILLERIA TEC");
+                    System.out.println("------------------------------------------");
+                    System.out.println("1) Agregar cliente a la fila");
+                    System.out.println("2) Atender cliente");
+                    System.out.println("3) Cliente sale de la fila");
+                    System.out.println("4) Terminar servicio");
+                    System.out.print("Selecciona una opcion: ");
+
+                    opcion = Integer.parseInt(leer.nextLine()); // Convertir a número
+                    System.out.println("--------------------------------------------------");
+                    break; // Si todo sale bien, salir del bucle
+                } catch (NumberFormatException e) {
+                    System.out.println("Error corazon debes ingresar un numero del 1 al 4 Intenta de nuevo.");
+                }
+            }
 
             switch (opcion) {
-                // Agregar cliente
                 case 1:
                     if (tamaño >= fila.length) {
-                        System.out.println("La fila ya esta llena.");
+                        System.out.println("La fila ya está llena.");
                     } else {
                         System.out.print("Nombre del cliente: ");
                         String nombre = leer.nextLine();
@@ -48,11 +54,10 @@ public class FilaTortillas {
                         System.out.println("Cliente agregado correctamente.");
                         System.out.println("----------------------------------------------------------");
                         mostrarFila(fila, tamaño);
-                        System.out.println(); // salto de línea final
+                        System.out.println();
                     }
                     break;
 
-                // Atender cliente
                 case 2:
                     if (tamaño == 0) {
                         System.out.println("No hay clientes en la fila.");
@@ -68,7 +73,6 @@ public class FilaTortillas {
                     }
                     break;
 
-                // Cliente sale voluntariamente
                 case 3:
                     if (tamaño == 0) {
                         System.out.println("No hay clientes en la fila.");
@@ -91,23 +95,20 @@ public class FilaTortillas {
                     }
                     break;
 
-                // Terminar servicio
                 case 4:
                     System.out.println("Servicio terminado.");
                     System.out.println("Clientes restantes en la fila: " + tamaño);
                     mostrarFila(fila, tamaño);
-                    System.out.println("\nMUCHAS GRACIAS POR SUS COMPRAS POR EL DÍA DE HOY");
+                    System.out.println("MUCHAS GRACIAS POR SUS COMPRAS POR EL DÍA DE HOY");
                     break;
 
                 default:
-                    if (opcion != 4)
-                        System.out.println("Opción no válida, intenta de nuevo.");
+                    System.out.println("Opción no válida, intenta de nuevo.");
                     break;
             }
         } while (opcion != 4);
     }
 
-    // Buscar cliente por nombre
     private static int buscarCliente(String[] fila, int tamaño, String nombre) {
         for (int i = 0; i < tamaño; i++) {
             if (fila[i].equalsIgnoreCase(nombre)) {
@@ -117,16 +118,17 @@ public class FilaTortillas {
         return -1;
     }
 
-    // Mostrar el estado actual de la fila
     private static void mostrarFila(String[] fila, int tamaño) {
         if (tamaño == 0) {
             System.out.println("La fila está vacía.");
         } else {
-            System.out.print("Fila actual: ");
+            System.out.println("Fila actual:");
             for (int i = 0; i < tamaño; i++) {
                 System.out.print(fila[i]);
-                if (i < tamaño - 1) System.out.print(" -----> ");
+                if (i < tamaño - 1) System.out.print(" ---> ");
+                if ((i + 1) % 3 == 0) System.out.println(); // salto de línea cada 3 clientes
             }
+            System.out.println();
         }
     }
 }
