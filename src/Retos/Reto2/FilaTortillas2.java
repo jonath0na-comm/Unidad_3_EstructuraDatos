@@ -6,19 +6,22 @@ package Retos.Reto2;
 
 /**
  *
- * @author jonav
+ * @author jonathan vargas arciniega 
+ * 24 de octubre 2025
  */
 import java.util.Scanner;
 
 public class FilaTortillas2 {
     public static void main(String[] args) {
-          int opcion = 0;
+        int opcion = 0;
         Scanner leer = new Scanner(System.in);
+
         System.out.println("TORTILLERIA TEC");
-        Persona inicioFila = null;
+        Persona inicioFila = null; // Puntero al primer cliente de la fila (inicio de la lista)
         System.out.println("------------------------------------------------------------------------");
 
         do {
+            // Menú de opciones
             System.out.println("1) Agregar cliente a la fila");
             System.out.println("2) Atender cliente");
             System.out.println("3) Cliente sale de la fila");
@@ -29,6 +32,8 @@ public class FilaTortillas2 {
             System.out.println("--------------------------------------------------------------------");
 
             switch (opcion) {
+
+                // Opción 1: Agregar un nuevo cliente
                 case 1:
                     System.out.println("Ingresa el nombre: ");
                     String nombre = leer.nextLine();
@@ -36,16 +41,20 @@ public class FilaTortillas2 {
                     personaNueva.nombre = nombre;
 
                     if (inicioFila == null) {
+                        // Si la fila está vacía, el nuevo cliente es el primero
                         inicioFila = personaNueva;
                     } else {
+                        // Si ya hay clientes, se pregunta dónde agregarlo
                         System.out.println("¿Deseas agregar al inicio o al final? (i/f): ");
                         String lugar = leer.nextLine().toLowerCase();
 
                         if (lugar.equals("i")) {
+                            // Insertar al inicio de la fila
                             personaNueva.vieneAtras = inicioFila;
                             inicioFila.vieneAdelante = personaNueva;
                             inicioFila = personaNueva;
                         } else {
+                            // Insertar al final de la fila
                             Persona siguiente = inicioFila;
                             while (siguiente.vieneAtras != null) {
                                 siguiente = siguiente.vieneAtras;
@@ -58,9 +67,11 @@ public class FilaTortillas2 {
                     System.out.println("-------------------------------------------------------------------");
                     break;
 
+                // Opción 2: Atender al primer cliente de la fila
                 case 2:
                     if (inicioFila != null) {
                         System.out.println("Se atendió a: " + inicioFila.nombre);
+                        // El siguiente cliente pasa a ser el primero
                         inicioFila = inicioFila.vieneAtras;
                         if (inicioFila != null) {
                             inicioFila.vieneAdelante = null;
@@ -71,25 +82,28 @@ public class FilaTortillas2 {
                     imprimirLista(inicioFila);
                     break;
 
+                // Opción 3: Eliminar un cliente específico de la fila
                 case 3:
                     System.out.println("¿A quién deseas eliminar?: ");
                     String eliminar = leer.nextLine();
                     Persona buscado = inicioFila;
 
+                    // Se busca a la persona por nombre
                     while (buscado != null && !buscado.nombre.equals(eliminar)) {
                         buscado = buscado.vieneAtras;
                     }
 
                     if (buscado != null) {
                         if (buscado.vieneAdelante == null) {
-                            // Es el inicio
+                            // Si es el primero de la fila
                             inicioFila = buscado.vieneAtras;
                             if (inicioFila != null)
                                 inicioFila.vieneAdelante = null;
                         } else if (buscado.vieneAtras == null) {
-                            // Es el final
+                            // Si es el último
                             buscado.vieneAdelante.vieneAtras = null;
                         } else {
+                            // Si está en medio de la fila
                             buscado.vieneAdelante.vieneAtras = buscado.vieneAtras;
                             buscado.vieneAtras.vieneAdelante = buscado.vieneAdelante;
                         }
@@ -100,9 +114,11 @@ public class FilaTortillas2 {
                     imprimirLista(inicioFila);
                     break;
 
+                // Opción 4: Terminar el servicio
                 case 4:
                     System.out.println("Servicio terminado. ¡Hasta luego!");
                     int contador = 0;
+                    // Se cuenta cuántas personas quedaron sin atender
                     while (inicioFila != null) {
                         contador++;
                         inicioFila = inicioFila.vieneAtras;
@@ -110,20 +126,23 @@ public class FilaTortillas2 {
                     System.out.println("Las personas sin atender son " + contador);
                     break;
 
+                // Opción 5: Imprimir la lista en orden inverso
                 case 5:
                     imprimirListaInversa(inicioFila);
                     break;
             }
 
-        } while (opcion != 4);
+        } while (opcion != 4); // El ciclo termina cuando el usuario selecciona "Terminar servicio"
     }
 
+    // Clase interna para representar a cada cliente en la fila
     static class Persona {
         String nombre;
-        Persona vieneAtras;
-        Persona vieneAdelante;
+        Persona vieneAtras;     // Enlace hacia el siguiente cliente
+        Persona vieneAdelante;  // Enlace hacia el cliente anterior
     }
 
+    // Método para imprimir la fila en orden normal
     public static void imprimirLista(Persona persona) {
         if (persona == null) {
             System.out.println("La fila está vacía.");
@@ -137,15 +156,18 @@ public class FilaTortillas2 {
         }
     }
 
+    // Método para imprimir la fila en orden inverso
     public static void imprimirListaInversa(Persona persona) {
         if (persona == null) {
             System.out.println("La fila está vacía.");
         } else {
+            // Se recorre hasta el último cliente
             Persona temp = persona;
             while (temp.vieneAtras != null) {
                 temp = temp.vieneAtras;
             }
             System.out.println("Fila en orden inverso:");
+            // Luego se imprime desde el final hacia el inicio
             while (temp != null) {
                 System.out.println(" - " + temp.nombre);
                 temp = temp.vieneAdelante;
