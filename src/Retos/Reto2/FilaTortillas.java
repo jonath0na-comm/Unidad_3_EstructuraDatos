@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class FilaTortillas {
      public static void main(String[] args){
-         Scanner leer = new Scanner(System.in);
+        Scanner leer = new Scanner(System.in);
         String[] fila = new String[10];
         int tamaño = 0;
         int opcion = 0;
@@ -25,7 +25,7 @@ public class FilaTortillas {
             // Bloque para capturar errores de tipo
             while (true) {
                 try {
-                    System.out.println("\n------------------------------------------");
+                    System.out.println("------------------------------------------");
                     System.out.println("TORTILLERIA TEC");
                     System.out.println("------------------------------------------");
                     System.out.println("1) Agregar cliente a la fila");
@@ -41,7 +41,6 @@ public class FilaTortillas {
                     System.out.println("Error corazon debes ingresar un numero del 1 al 4 Intenta de nuevo.");
                 }
             }
-
             switch (opcion) {
                 case 1:
                     if (tamaño >= fila.length) {
@@ -57,7 +56,6 @@ public class FilaTortillas {
                         System.out.println();
                     }
                     break;
-
                 case 2:
                     if (tamaño == 0) {
                         System.out.println("No hay clientes en la fila.");
@@ -72,7 +70,6 @@ public class FilaTortillas {
                         System.out.println();
                     }
                     break;
-
                 case 3:
                     if (tamaño == 0) {
                         System.out.println("No hay clientes en la fila.");
@@ -94,7 +91,6 @@ public class FilaTortillas {
                         }
                     }
                     break;
-
                 case 4:
                     System.out.println("Servicio terminado.");
                     System.out.println("Clientes restantes en la fila: " + tamaño);
@@ -108,7 +104,6 @@ public class FilaTortillas {
             }
         } while (opcion != 4);
     }
-
     private static int buscarCliente(String[] fila, int tamaño, String nombre) {
         for (int i = 0; i < tamaño; i++) {
             if (fila[i].equalsIgnoreCase(nombre)) {
@@ -117,7 +112,6 @@ public class FilaTortillas {
         }
         return -1;
     }
-
     private static void mostrarFila(String[] fila, int tamaño) {
         if (tamaño == 0) {
             System.out.println("La fila está vacía.");
