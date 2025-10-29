@@ -4,7 +4,7 @@
  */
 package Ejercicio1.datos;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +17,7 @@ public class KardexDatos {
     public static String[][] datos = new String[10][3];
 
     // Lista de Materias
-    public static List<Materias> Materias = new ArrayList<>();
+    public static List<Materias> materias = new ArrayList<>();
 
     // Para saber cuántos registros llevamos
     public static int index = 0;
