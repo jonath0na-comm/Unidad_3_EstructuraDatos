@@ -6,6 +6,8 @@ jonathan vargas arciniega 14 de octubre 2025
 package Ejercicio1;
 
 import Ejercicio1.datos.KardexDatos;
+import static Ejercicio1.datos.KardexDatos.index;
+import Ejercicio1.datos.Materias;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,6 +42,7 @@ public static boolean modi=false;
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         borrartd = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +91,13 @@ public static boolean modi=false;
 
         borrartd.setText("Borrar");
 
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,9 +106,11 @@ public static boolean modi=false;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(339, 339, 339)
+                                .addGap(236, 236, 236)
+                                .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(borrartd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAgregar))
@@ -126,7 +138,8 @@ public static boolean modi=false;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
-                    .addComponent(borrartd))
+                    .addComponent(borrartd)
+                    .addComponent(modificar))
                 .addGap(10, 10, 10)
                 .addComponent(prom))
         );
@@ -142,17 +155,37 @@ public static boolean modi=false;
          double promedio = KardexDatos.calcularPromedio();
     prom.setText("El Promedio es: " + String.format("%.2f", promedio));
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+       int index = tablaDatos.getSelectedRow();
+       if(index>==0){
+           AgregarCalificaciones dialog = new
+               AgregarCalificaciones(this,true, index);
+           
+           dialog.setVisible(true);
+           actualizarTabla();
+       }
+    }//GEN-LAST:event_modificarActionPerformed
    // este metodo permite actualizar su tabla con los datos que tiene el arreglo
     private void actualizarTabla(){
         String columnas []= {"Materia", "Semestre", "Calificaciones"};
-       
+        String matrizDatos [][] = new String  [KardexDatos.Listasmaterias.size()][];
+        
+        int index = 0;
+        for(Materias materias: KardexDatos.Listasmaterias){
+            matrizDatos [index] = materias.aArreglo();
+            index++;
+        }  
          DefaultTableModel model =
                  new DefaultTableModel(KardexDatos.datos, columnas);
          tablaDatos.setModel(model);
+         
          // da formato a la tabla
                 
     }
     /**
+     * 
+     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -194,6 +227,7 @@ public static boolean modi=false;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificar;
     private javax.swing.JLabel prom;
     private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables

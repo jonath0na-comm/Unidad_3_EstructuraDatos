@@ -17,7 +17,7 @@ public class KardexDatos {
     public static String[][] datos = new String[10][3];
 
     // Lista de Materias
-    public static List<Materias> materias = new ArrayList<>();
+    public static List<Materias> Listasmaterias = new ArrayList<>();
 
     // Para saber cuántos registros llevamos
     public static int index = 0;
@@ -45,6 +45,6 @@ public class KardexDatos {
 
     // Método para agregar una Materia a la lista
     public static void agregarMateria(Materias m) {
-        materias.add(m);
+        Listasmaterias.add(m);
     }
 }

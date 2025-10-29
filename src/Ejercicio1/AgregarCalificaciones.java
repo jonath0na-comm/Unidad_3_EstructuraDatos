@@ -5,6 +5,7 @@
 package Ejercicio1;
 
 import Ejercicio1.datos.KardexDatos;
+import Ejercicio1.datos.Materias;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,10 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
     public AgregarCalificaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    AgregarCalificaciones(TablaKardex aThis, boolean b, int index) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -152,12 +157,11 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 // metodo para guardar elementos
     private void btnGuardadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardadActionPerformed
-        // TODO add your handling code here:
-        String materia = txtMateria.getText();
+
+    String materia = txtMateria.getText();
     String semestre = txtSemestre.getText();
     String calificacion = txtCalificacion.getText();
 
-  
     // Validar que no se exceda el límite de 10 registros
     if (KardexDatos.index < 10) {
         KardexDatos.datos[KardexDatos.index][0] = materia;
@@ -170,7 +174,13 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, "Ya se alcanzó el límite de 10 registros");
     }
     
-                
+    var materiaObj = new Materias();
+    materiaObj.setNombre(materia);
+    materiaObj.setSemestre(Integer.parseInt(semestre));
+    materiaObj.setCalificacion(Integer.parseInt(semestre));
+    
+    KardexDatos.Listasmaterias.add(materiaObj);
+    this.dispose();
         
     }//GEN-LAST:event_btnGuardadActionPerformed
 

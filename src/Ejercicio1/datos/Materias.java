@@ -10,7 +10,7 @@ package Ejercicio1.datos;
  */
 public class Materias {
     String nombre;
-    int calificaciòn;
+    int calificacion;
     int semestre;
 
     public String getNombre() {
@@ -21,12 +21,12 @@ public class Materias {
         this.nombre = nombre;
     }
 
-    public int getCalificaciòn() {
-        return calificaciòn;
+    public int getCalificacion() {
+        return calificacion;
     }
 
-    public void setCalificaciòn(int calificaciòn) {
-        this.calificaciòn = calificaciòn;
+    public void setCalificacion(int calificaciòn) {
+        this.calificacion = calificaciòn;
     }
 
     public int getSemestre() {
@@ -36,4 +36,13 @@ public class Materias {
     public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
+    public String [] aArreglo(){
+        String [] arreglo = new String [3];
+        arreglo[0] = nombre;
+        arreglo[1] = "" + semestre;
+        arreglo[2] = "" + calificacion;
+        return arreglo;
+        
+    }
+    
 }
