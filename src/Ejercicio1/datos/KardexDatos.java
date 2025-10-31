@@ -17,10 +17,11 @@ public class KardexDatos {
     public static String[][] datos = new String[10][3];
 
     // Lista de Materias
-    public static List<Materias> Listasmaterias = new ArrayList<>();
+    public static ArrayList<Materias> Listasmaterias = new ArrayList<>();
 
     // Para saber cuántos registros llevamos
     public static int index = 0;
+    public static Object listasMaterias;
 
     // Método que calcula el promedio según las calificaciones ingresadas
     public static double calcularPromedio() {

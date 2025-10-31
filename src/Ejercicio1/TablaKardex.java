@@ -8,6 +8,7 @@ package Ejercicio1;
 import Ejercicio1.datos.KardexDatos;
 import static Ejercicio1.datos.KardexDatos.index;
 import Ejercicio1.datos.Materias;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -90,6 +91,11 @@ public static boolean modi=false;
         );
 
         borrartd.setText("Borrar");
+        borrartd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrartdActionPerformed(evt);
+            }
+        });
 
         modificar.setText("Modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,20 +112,19 @@ public static boolean modi=false;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(236, 236, 236)
-                                .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(borrartd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAgregar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(480, 480, 480)
-                                    .addComponent(prom))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(44, 44, 44)
+                                .addGap(480, 480, 480)
+                                .addComponent(prom))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(borrartd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(19, 19, 19)
                         .addComponent(jLabel2)
@@ -158,7 +163,7 @@ public static boolean modi=false;
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
        int index = tablaDatos.getSelectedRow();
-       if(index>==0){
+       if(index>=0){
            AgregarCalificaciones dialog = new
                AgregarCalificaciones(this,true, index);
            
@@ -166,6 +171,17 @@ public static boolean modi=false;
            actualizarTabla();
        }
     }//GEN-LAST:event_modificarActionPerformed
+
+    private void borrartdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrartdActionPerformed
+int fila = tablaDatos.getSelectedRow(); // obtiene la fila seleccionada
+
+    if (fila != -1) { // si hay una fila seleccionada
+        KardexDatos.Listasmaterias.remove(fila); // elimina el elemento de la lista
+        actualizarTabla(); // actualiza la tabla
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecciona una fila para eliminar.");
+    }
+    }//GEN-LAST:event_borrartdActionPerformed
    // este metodo permite actualizar su tabla con los datos que tiene el arreglo
     private void actualizarTabla(){
         String columnas []= {"Materia", "Semestre", "Calificaciones"};
