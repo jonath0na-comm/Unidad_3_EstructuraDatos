@@ -1,16 +1,17 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ dialog donde ingresas los datos para agregar
  */
-package Ejercicio1;
+package ejercicio1;
 
-import Ejercicio1.datos.KardexDatos;
-import Ejercicio1.datos.Materias;
+import ejercicio1.datos.KardexDatos;
 import javax.swing.JOptionPane;
+import ejercicio1.datos.Materias; 
+
 
 /**
  *
  * @author jonathan vargas arciniega 
+ * 31 octubre 2025
  */
 public class AgregarCalificaciones extends javax.swing.JDialog {
 
@@ -18,12 +19,17 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
      * Creates new form AgregarCalificaciones
      */
     public AgregarCalificaciones(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
+         super(parent, modal);
+    initComponents();
 
-    AgregarCalificaciones(TablaKardex aThis, boolean b, int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // Si estamos en modo modificación, cargar los datos existentes
+    if (TablaKardex.modi) {
+        //int index = Modificar.a;
+        
+       // txtMateria.setText(KardexDatos.datos[index][0]);
+      //  txtSemestre.setText(KardexDatos.datos[index][1]);
+       // txtCalificacion.setText(KardexDatos.datos[index][2]);
+    }
     }
 
     /**
@@ -42,8 +48,8 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         btnGuardad = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,6 +65,11 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
             }
         });
 
+        txtCalificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCalificacionActionPerformed(evt);
+            }
+        });
         txtCalificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCalificacionKeyPressed(evt);
@@ -68,28 +79,10 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
         jLabel1.setText("Calificacion");
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Materia");
 
         jLabel3.setText("Semestre");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
         btnGuardad.setText("Guardar");
         btnGuardad.addActionListener(new java.awt.event.ActionListener() {
@@ -103,84 +96,98 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(btnGuardad)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnGuardad)
+                .addGap(0, 76, Short.MAX_VALUE))
+        );
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(331, 331, 331))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                                .addComponent(btnGuardad))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtSemestre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                .addComponent(txtMateria, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCalificacion))))
+                            .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel3)))
-                .addContainerGap())
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
                 .addComponent(txtSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardad))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 // metodo para guardar elementos
     private void btnGuardadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardadActionPerformed
-
-    String materia = txtMateria.getText();
+  String materia = txtMateria.getText();
     String semestre = txtSemestre.getText();
     String calificacion = txtCalificacion.getText();
 
-    // Validar que no se exceda el límite de 10 registros
-    if (KardexDatos.index < 10) {
-        KardexDatos.datos[KardexDatos.index][0] = materia;
-        KardexDatos.datos[KardexDatos.index][1] = semestre;
-        KardexDatos.datos[KardexDatos.index][2] = calificacion;
-        KardexDatos.index++;
-        JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
-        this.dispose(); // Cierra el diálogo
-    } else {
-        JOptionPane.showMessageDialog(this, "Ya se alcanzó el límite de 10 registros");
-    }
-    
-    var materiaObj = new Materias();
+    Materias materiaObj = new Materias();
     materiaObj.setNombre(materia);
-    materiaObj.setSemestre(Integer.parseInt(semestre));
-    materiaObj.setCalificacion(Integer.parseInt(semestre));
-    
-    KardexDatos.Listasmaterias.add(materiaObj);
-    this.dispose();
+    materiaObj.setSemestre(semestre);
+    materiaObj.setCalificacion(calificacion);
+
+    if (TablaKardex.modi && TablaKardex.filaSeleccionada != -1) {
+        //  Si estamos en modo modificar, reemplazamos el registro existente
+        KardexDatos.listasMaterias.set(TablaKardex.filaSeleccionada, materiaObj);
+    } else {
+        // ➕ Si no, agregamos uno nuevo
+        KardexDatos.listasMaterias.add(materiaObj);
+    }
+
+    this.dispose(); // cerrar ventana          
         
     }//GEN-LAST:event_btnGuardadActionPerformed
 
@@ -212,6 +219,17 @@ public class AgregarCalificaciones extends javax.swing.JDialog {
          }
     }//GEN-LAST:event_btnGuardadKeyPressed
 
+    private void txtCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCalificacionActionPerformed
+public void cargarDatos(int fila) {
+    if (fila != -1) {
+        Materias car= KardexDatos.listasMaterias.get(fila);
+        txtMateria.setText(car.getNombre());
+        txtSemestre.setText(car.getSemestre());
+        txtCalificacion.setText(car.getCalificacion());
+    }
+}
     /**
      * @param args the command line arguments
      */

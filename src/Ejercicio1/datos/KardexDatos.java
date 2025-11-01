@@ -1,51 +1,39 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Ejercicio1.datos;
 
-import java.util.List;
+ */
+package ejercicio1.datos;
+
 import java.util.ArrayList;
 
 /**
- *
- * @author jonav
+ *Esta clase me permite mantener la informacion entre las ventanas
+ * 
+ * @author jonathan vargas arciniega 
+ * 14 de octubre
  */
 public class KardexDatos {
-   
-    // Arreglo de datos
-    public static String[][] datos = new String[10][3];
+ /**   public static String [][] datos=
+            new String [10][3];
+    public static int index=0; // para saber cuantos llevo
+   */ 
+public static double calcularPromedio() {
+    if (KardexDatos.listasMaterias.size() == 0) return 0;
 
-    // Lista de Materias
-    public static ArrayList<Materias> Listasmaterias = new ArrayList<>();
-
-    // Para saber cuántos registros llevamos
-    public static int index = 0;
-    public static Object listasMaterias;
-
-    // Método que calcula el promedio según las calificaciones ingresadas
-    public static double calcularPromedio() {
-        if (index == 0) return 0;
-
-        double suma = 0;
-        for (int i = 0; i < index; i++) {
-            suma += Double.parseDouble(datos[i][2]);
+    double suma = 0;
+    for (int i = 0; i < KardexDatos.listasMaterias.size(); i++) {
+        Materias mat = KardexDatos.listasMaterias.get(i);
+        suma += Double.parseDouble(mat.calificacion);
+    }
+    return suma / KardexDatos.listasMaterias.size();
+     // metodo que calcula el promedio segun lo vallan ingresando
+} /*
+public static int buscar(String dato) {
+    for (int i = 0; i < index; i++) {
+        if (dato.equalsIgnoreCase(datos[i][0])) {
+            return i; // retorna el índice encontrado
         }
-        return suma / index;
     }
-
-    // Método para buscar un dato en la primera columna del arreglo
-    public static int buscar(String dato) {
-        for (int i = 0; i < index; i++) {
-            if (dato.equals(datos[i][0])) {
-                return i; // retorna la posición si lo encuentra
-            }
-        }
-        return -1; // retorna -1 si no lo encuentra
-    }
-
-    // Método para agregar una Materia a la lista
-    public static void agregarMateria(Materias m) {
-        Listasmaterias.add(m);
-    }
+    return -1; // si no se encontró
+} */
+    public static ArrayList<Materias> listasMaterias = new ArrayList<>();
 }
